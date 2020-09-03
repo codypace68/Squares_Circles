@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        #inputs-container div{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id='canvas' width="200" height="200"></canvas>
+
+    <div id='inputs-container'>
+        <div>
+            <label for='point-count'>Number of Points</label>
+            <input id='point-count' type='number' min="0" max="40" value=5>
+        </div>       
+        <div>
+            <label for='rotation-speed'>Speed of Rotaion</label>
+            <input id='rotation-speed' type='number' value=0 min="0" max="10">
+        </div>       
+        <div>
+            <label for='radius'>Radius</label>
+            <input id='radius' type='number' value=25 min="0" max="90">
+        </div>       
+        <div>
+            <label for='inner-radius'>Inner Radius %</label>
+            <input id='inner-radius' type='number' value=10 min="0" max="100">
+        </div>   
+        <div>
+            <label for='line-width'>Line Width</label>
+            <input id='line-width' type='number' value=5 min="0" max="15">
+        </div>   
+        <div>
+            <label for='fill-color'>Fill Color</label>
+            <input id='fill-color' type='color' value="#0000ff">
+        </div>       
+        <div>
+            <label for='stroke-color'>Stroke Color</label>
+            <input id='stroke-color' type='color'>
+        </div>
+    </div>
+    <div >
+        <button id='produce-code'>Produce Code (No Rotation)</button>
+        <p id='code-to-make'>
+
+        </p>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const cX = canvas.width / 2;
+        const cY = canvas.height / 2;
+        let radius = 25;
+        let innerRadius = 10;
+        let steps = 5;
+        let eachStepRadian = (2 * Math.PI) / steps;
+        let lineWidth = 5;
+        let rotationSpeed = 0;
+        let rotation = 0;
+        let fillColor = 'blue';
+        let strokeColor = 'black';
+
+        document.getElementById('point-count').addEventListener('change', (e) => {
+            document.getElementById('code-to-make').innerHTML = '';
+            steps = e.target.value;
+        })
+
+        document.getElementById('rotation-speed').addEventListener('change', (e) => {
+            document.getElementById('code-to-make').innerHTML = '';
+            rotationSpeed = e.target.value;
+        })
+
+        document.getElementById('radius').addEventListener('change', (e) => {
+            document.getElementById('code-to-make').innerHTML = '';
+            radius = e.target.value;
+        })
+
+        document.getElementById('inner-radius').addEventListener('change', (e) => {
+            document.getElementById('code-to-make').innerHTML = '';
+            innerRadius = e.target.value;
+        })
+
+        document.getElementById('line-width').addEventListener('change', (e) => {
+            document.getElementById('code-to-make').innerHTML = '';
+            lineWidth = e.target.value;
+        })
+
+        document.getElementById('fill-color').addEventListener('change', (e) => {
+            document.getElementById('code-to-make').innerHTML = '';
+            fillColor = e.target.value;
+        })
+
+        document.getElementById('stroke-color').addEventListener('change', (e) => {
+            document.getElementById('code-to-make').innerHTML = '';
+            strokeColor = e.target.value;
+        })
+
+        document.getElementById('produce-code').addEventListener('click', () => {
+            document.getElementById('code-to-make').innerHTML = `
+                const canvas = document.getElementById('#your-canvas-id#');
+                <br>
+                const ctx = canvas.getContext('2d');
+                <br>
+                const cX = canvas.width / 2;
+                <br>
+                const cY = canvas.height / 2;
+                <br>
+                const eachStepRadian = (2 * Math.PI) / ${steps};
+                <br><br>
+                ctx.clearRect(0, 0, canvas.width, canvas.height) // clear canvas before drawing new star
+                <br>
+                ctx.beginPath();
+                <br><br>
+                // batch drawings together for performance sake
+                <br>
+                for (let i = 0; i < ${steps + 1}; i += 1) {
+                    <br>
+                    &nbsp&nbsp&nbsp&nbsplet xHalf = ${radius} * (${innerRadius} / 100) * Math.cos((i * eachStepRadian) - eachStepRadian / 2);
+                    <br>
+                    &nbsp&nbsp&nbsp&nbsplet yHalf = ${radius} * (${innerRadius} / 100) * Math.sin((i * eachStepRadian) - eachStepRadian / 2);
+                    <br>
+                    &nbsp&nbsp&nbsp&nbsplet x = ${radius} * Math.cos(i * eachStepRadian);
+                    <br>
+                    &nbsp&nbsp&nbsp&nbsplet y = ${radius} * Math.sin(i * eachStepRadian);
+                    <br><br>
+                    &nbsp&nbsp&nbsp&nbsp// line to half the next step and specified percentage of the radius
+                    <br>
+                    &nbsp&nbsp&nbsp&nbspctx.lineTo(cX + xHalf, cY + yHalf)
+                    <br><br>
+                    &nbsp&nbsp&nbsp&nbsp// line to next stepRadian
+                    <br>
+                    &nbsp&nbsp&nbsp&nbspctx.lineTo(cX + x, cY + y)
+                    <br>
+                }
+                <br><br>
+                ctx.strokeStyle = '${strokeColor}';<br>
+                ctx.fillStyle = '${fillColor}';<br>
+                ctx.lineWidth = ${lineWidth};<br>
+                ctx.stroke();<br>
+                ctx.fill();<br>
+            `
+        })
+
+
+        // // Draw blue circle in center of canvas
+        // ctx.beginPath();
+        // ctx.arc(cX, cY, 5, 0, 2 * Math.PI);
+        // ctx.fillStyle = 'blue';
+        // ctx.fill();
+
+        // // Draw black circle equally spaced around diameter of blue circle
+        // for (let i = 0; i < steps; i += 1) {
+        //     let x = radius * Math.cos(i * eachStepRadian);
+        //     let y = radius * Math.sin(i * eachStepRadian);
+        //     ctx.beginPath();
+        //     ctx.arc(cX + x, cY + y, 5, 0, 2 * Math.PI)
+        //     ctx.fillStyle = 'black';
+        //     ctx.fill();
+        // }
+
+        // Creates random length lines draw from center of canvas and rotates them
+        // for (let i = 0; i < steps; i += 1) {
+        //     let x = radius * Math.cos(i * eachStepRadian);
+        //     let y = radius * Math.sin(i * eachStepRadian);
+        //     ctx.beginPath();
+        //     ctx.moveTo(cX, cY)
+        //     ctx.lineTo(cX + x, cY + y)
+        //     // ctx.strokeStyle = 'black';
+        //     // ctx.lineWidth = 5;
+        //     ctx.stroke();
+        // }
+
+
+        // start the animation cycle
+        requestAnimationFrame(rotate)
+
+        function rotate() {
+            rotation += rotationSpeed / 100;
+            drawStar(radius, steps, rotationSpeed, fillColor, strokeColor);
+            requestAnimationFrame(rotate);
+        }
+
+
+
+        function drawStar() {
+            // needs to be reset whenever steps change
+            eachStepRadian = (2 * Math.PI) / steps;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height) // clear canvas before drawing new star
+            ctx.beginPath();
+
+            // batch drawings together for performance sake
+            for (let i = 0; i < steps + 1; i += 1) {
+                let xHalf = radius * (innerRadius / 100) * Math.cos(((i * eachStepRadian) - eachStepRadian / 2) + rotation);
+                let yHalf = radius * (innerRadius / 100) * Math.sin(((i * eachStepRadian) - eachStepRadian / 2) + rotation);
+                let x = radius * Math.cos((i * eachStepRadian) + rotation);
+                let y = radius * Math.sin((i * eachStepRadian) + rotation);
+
+                // line to half the next step and specified percentage of the radius
+                ctx.lineTo(cX + xHalf, cY + yHalf)
+
+                // line to next stepRadian
+                ctx.lineTo(cX + x, cY + y)
+            }
+
+            ctx.strokeStyle = strokeColor;
+            ctx.fillStyle = fillColor;
+            ctx.lineWidth = lineWidth;
+            ctx.stroke();
+            ctx.fill();
+        }
+    </script>
+</body>
+
+</html>
+
+

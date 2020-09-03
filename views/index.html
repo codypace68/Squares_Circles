@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="styles/style.css"></link>
+        <link rel="shortcut icon" href="images/favicon.png">
+    </head>
+    <body>
+        <div class='noselect' id='grid-container'>
+            <canvas id="stage"></canvas>
+            <canvas id="enemy-stage"></canvas>
+            <canvas id="player-stage"></canvas>
+            <div id='game-controls'>
+                <div>
+                    <h4 id='invincibility-label'>Invincibilty Meter</h4>
+                    <div id = 'invincibility-meter' class='empty'>
+                        <div id = 'invincibility-left'>
+    
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 id='current-score'>Score: 0</h4>
+                </div>
+            </div>
+            <div id='level-display'>
+                <h4 id='level-label'>Level 1</h4>
+                <div id='levels'>
+                    <button id='level-up'>Up</button>
+                    <button id='level-down'>Down</button>
+                </div>
+                <div>
+                    <div>
+                        <label for="show-enemy-hit-boxes">Show Enemy HitBoxes?</label>
+                        <input id='show-enemy-hit-boxes' type='checkbox'>
+                    </div>
+                    
+                    <div>
+                        <label for="show-player-hit-box">Show Player HitBox?</label>
+                        <input id='show-player-hit-box' type='checkbox'>
+                    </div>
+                    
+                    <div>
+                        <label for="show-player-guiding-point">Show Player Guiding Point?</label>
+                        <input id='show-player-guiding-point' type='checkbox'>
+                    </div>
+
+                    <div>
+                        <label for="show-enemy-following-line">Show Line for Following Enemies?</label>
+                        <input id='show-enemy-following-line' type='checkbox'>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='noselect' id='game-over-menu'>
+            <div id='game-over-text'>
+                <h4 > Game Over! Better Luck next time</h4>
+                <button id='reset-game' class='no-select'> Retry Level</button>
+            </div>
+        </div>
+
+        <div class='noselect' id='level-won-menu' data-level='1'>
+            <div id='level-won-text'>
+                <h4 id='level-won-text-header'> Welcome to Squares and Circles! </h4>
+                <h5 id='final-score'></h5>
+                <h5 id='level-won-select-power-up-header'>Please select your powerups for this level. <br> Click "Play Level" when ready</h5>
+                <div id='power-up-group'>
+                    <label for="circle-magnet">Circle Magnet</label>
+                    <input id="circle-magnet" type='radio' name='power-up'>
+                    <br>
+                    <label for="square-repelent">Square Repelent</label>
+                    <input id="square-repelent" type='radio' name='power-up'>
+                    <br>
+                    <label for="edible-detector">Edible Detector</label>
+                    <input id="edible-detector" type='radio' name='power-up'>
+                </div>
+                <button id='next-level'> Play Level</button>
+            </div>
+        </div>
+        
+        <script src='scripts/main.js' type='module'></script>
+    </body>
+</html>

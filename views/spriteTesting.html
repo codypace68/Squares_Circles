@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <link rel="stylesheet" type="text/css" href="./style.css"></link>
+        <link rel="shortcut icon" href="images/favicon.png"> -->
+</head>
+
+<body>
+    <canvas width='500' height='500' id='canvas'></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = document.createElement('img');
+        let gameCycle = 0;
+        img.src = 'images/mario.gif';
+        // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+        const animations = [
+        {
+            img: img,
+            sx: 151,
+            sy: 5,
+            sWidth: 16,
+            sHeight: 21,
+            dx: 0,
+            dy: 0,
+            dWidth: 16,
+            dHeight: 21,
+        },
+        {
+            img: img,
+            sx: 171,
+            sy: 5,
+            sWidth: 16,
+            sHeight: 21,
+            dx: 0,
+            dy: 0,
+            dWidth: 16,
+            dHeight: 21,
+        },
+        {
+            img: img,
+            sx: 189,
+            sy: 5,
+            sWidth: 16,
+            sHeight: 21,
+            dx: 0,
+            dy: 0,
+            dWidth: 16,
+            dHeight: 21,
+        },
+        {
+            img: img,
+            sx: 210,
+            sy: 5,
+            sWidth: 16,
+            sHeight: 21,
+            dx: 0,
+            dy: 0,
+            dWidth: 16,
+            dHeight: 21,
+        },
+        {
+            img: img,
+            sx: 230,
+            sy: 5,
+            sWidth: 16,
+            sHeight: 21,
+            dx: 0,
+            dy: 0,
+            dWidth: 16,
+            dHeight: 21,
+        }
+    ]
+
+        img.onload = () => {
+            requestAnimationFrame(cycleAnimation);
+            // ctx.drawImage(img, 152, 0, 17, 25, 0, 0, 17, 25)
+            // console.log(ctx.getImageData(0,0, canvas.width, canvas.height))
+        }
+
+        function cycleAnimation() {
+            let cycleRatio = gameCycle % 20 / (20 / (animations.length - 1));
+            let animation = animations[Math.round(cycleRatio)];
+            // console.log(Math.round(cycleRatio))
+            // console.log(animation)
+
+            ctx.clearRect(0,0,canvas.width,canvas.height)
+            ctx.drawImage(img, animation.sx, animation.sy, animation.sWidth, animation.sHeight, 0, 0, animation.dWidth, animation.sHeight)
+            gameCycle += 1;
+            requestAnimationFrame(cycleAnimation);
+        }
+    </script>
+</body>
+
+</html>

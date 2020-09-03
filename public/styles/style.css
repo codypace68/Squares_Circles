@@ -1,0 +1,182 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+    overscroll-behavior: none;
+    position: fixed;
+}
+
+#grid-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#enemy-stage {
+    width: 100vw;
+    height: 100vh;
+    background: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#player-stage {
+    width: 100vw;
+    height: 100vh;
+    background: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#gameover-banner {
+    position: absolute;
+}
+
+#game-controls {
+    position: absolute;
+    background: #0000008f;
+    padding: 10px;
+    border-bottom-right-radius: 50px;
+}
+
+#invincibility-label {
+    display: inline-block;
+    margin: 0;
+    color: white;
+}
+
+#invincibility-meter {
+    width: 330px;
+    height: 20px;
+    border: 2px solid white;
+    margin-right: 17px;
+    display: inline-block;
+    line-height: 100%;
+}
+
+#invincibility-meter.empty {
+    border: 2px solid red;
+    box-shadow: 0px 0px 6px red;    
+}
+
+#invincibility-left {
+    background: linear-gradient(45deg, #79ff7070, #0aff29f2);
+    width: 0%;
+    max-width: 100%;
+    height: 100%;
+    /* border-top-right-radius: 19px; */
+    margin: 1px;
+}
+
+#level-display {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 20px;
+    background: #0000008f;
+    border-bottom-left-radius: 50px;
+    color: white;
+}
+
+#level-display h4{
+    margin: 0px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+#game-over-menu {
+    display: none;
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: #2c2c2cc7;
+    align-items: center;
+    justify-content: center;
+}
+
+#game-over-text {
+    text-align: center;
+}
+
+#game-over-text h4 {
+    color: #ff7575;
+    font-size: 35px;
+}
+
+
+#level-won-menu {
+    display: block;
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: #2c2c2cc7;
+    align-items: center;
+    justify-content: center;
+}
+
+#level-won-text {
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    width: 100vw;
+}
+
+#level-won-text h4 {
+    color: #69f031;
+    font-size: 35px;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
+#levels {
+    display: inline-block;
+}
+
+#current-score {
+    margin: 0;
+    margin-top: 6px;
+    font-size: 20px;
+    color: white;
+    border-top: 2px solid;
+    width: 96%;
+}
+
+#final-score, #level-won-select-power-up-header{
+    font-size: 30px;
+    color: #ff8013;
+}
+
+#level-won-select-power-up-header{
+    font-size: 30px;
+    color: #42cbff;
+}
+
+#power-up-group {
+    font-size: 25px;
+    color: #ff5fc6;
+}
+
+#next-level {
+    border: none;
+    padding: 12px;
+    background: #e300ff;
+    color: white;
+    margin-top: 32px;
+}

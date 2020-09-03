@@ -1,0 +1,17 @@
+{
+  "name": "squares_circles",
+  "version": "1.0.0",
+  "description": "HTML5 games where circles eat circles and squares kill circles",
+  "main": "vectors.js",
+  "scripts": {
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cod Pace",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-static": "^5.0.0",
+    "mongodb": "^3.6.0"
+  }
+}
