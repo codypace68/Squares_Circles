@@ -1,4 +1,6 @@
-import {levelDefs} from '../main.js';
+import {
+    levelDefs
+} from '../main.js';
 console.log('test')
 const Game = class {
     constructor(mainStage, playerStage, enemyStage) {
@@ -12,11 +14,28 @@ const Game = class {
         this.scaleValue = 1;
         this.paused = false;
         this.score = 0;
+        this.retryLevel;
         window.requestAnimationFrame(this.mainCycle.bind(this));
 
         window.addEventListener('keyup', (e) => {
             if (e.key === ' ') this.paused = !this.paused;
         })
+
+        var myRadios = document.getElementsByName('power-up');
+        var setCheck;
+        var x = 0;
+        for (x = 0; x < myRadios.length; x++) {
+
+            myRadios[x].onclick = function () {
+                if (setCheck != this) {
+                    setCheck = this;
+                } else {
+                    this.checked = false;
+                    setCheck = null;
+                }
+            };
+
+        }
 
         // auto level up
         document.getElementById('level-up').addEventListener('click', this.levelUp.bind(this));
@@ -44,7 +63,7 @@ const Game = class {
                 /BlackBerry/i,
                 /Windows Phone/i
             ];
-        
+
             return toMatch.some((toMatchItem) => {
                 return navigator.userAgent.match(toMatchItem);
             });
@@ -52,7 +71,7 @@ const Game = class {
 
         if (detectMob()) {
             document.getElementById('mobile-invincibility').style.display = 'block';
-            
+
         }
 
     }
@@ -263,17 +282,19 @@ const Game = class {
     setGameOver() {
         document.getElementById('game-over-menu').style.display = 'flex';
         this.playerStage.player.alive = false;
+        this.retryLevel = true;
     }
 
     resetGame() {
+        console.log(this.retryLevel)
         this.playerStage.player.alive = true;
         this.playerStage.player.radius = this.playerStage.defaultPlayerRadius;
         this.playerStage.player.hitBoxSize = (this.playerStage.defaultPlayerRadius * 2) / Math.sqrt(2);
         this.playerStage.player.invincibilityActive = false;
         this.playerStage.player.mouseDown = false;
-        this.playerStage.player.squareRepelent = document.getElementById('square-repelent').checked;
-        this.playerStage.player.circleMagnet = document.getElementById('circle-magnet').checked;
-        this.playerStage.player.edibleDetector = document.getElementById('edible-detector').checked;
+        this.playerStage.player.squareRepelent = this.retryLevel ? document.getElementById('square-repelent-retry').checked : document.getElementById('square-repelent').checked;
+        this.playerStage.player.circleMagnet = this.retryLevel ? document.getElementById('circle-magnet-retry').checked : document.getElementById('circle-magnet').checked;
+        this.playerStage.player.edibleDetector = this.retryLevel ? document.getElementById('edible-detector-retry').checked : document.getElementById('edible-detector').checked;
         this.playerStage.player.x = 0;
         this.playerStage.player.y = 0;
         this.playerStage.requestedPosition = {
@@ -302,6 +323,7 @@ const Game = class {
     levelUp() {
         this.level += 1;
         document.getElementById('level-label').innerHTML = `Level ${this.level}`;
+        this.retryLevel = false;
         this.resetGame();
     }
 
@@ -309,6 +331,7 @@ const Game = class {
         if (this.level - 1 <= 0) return;
         this.level -= 1;
         document.getElementById('level-label').innerHTML = `Level ${this.level}`;
+        this.retryLevel = false;
         this.resetGame();
     }
 
@@ -321,12 +344,12 @@ const Game = class {
     }
 
     mainCycle() {
-        if (this.level === 0 ) return  requestAnimationFrame(this.mainCycle.bind(this));
+        if (this.level === 0) return requestAnimationFrame(this.mainCycle.bind(this));
         if (this.paused) return requestAnimationFrame(this.mainCycle.bind(this));
         if (this.enemyFreezeCycles === 0) this.enemyStage.updateEnemyPositions(this.playerStage.player, this.gameCycle);
         if (this.playerStage.player.alive) this.playerStage.updatePlayerPosition(this.playerStage.player.invincibilityActive ? 5 : 2);
         if (this.playerStage.player.alive) this.checkCollsion();
-        
+
 
         // draw stages
         this.enemyStage.clearStage();

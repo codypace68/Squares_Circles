@@ -55,6 +55,17 @@
         <div class='noselect' id='game-over-menu'>
             <div id='game-over-text'>
                 <h4 > Game Over! Better Luck next time</h4>
+                <h5 id='level-won-select-power-up-header'>Please select your powerups for this level. <br> Click "Retry Level" when ready</h5>
+                <div id='power-up-group'>
+                    <label for="circle-magnet-retry">Circle Magnet</label>
+                    <input id="circle-magnet-retry" type='radio' name='power-up'>
+                    <br>
+                    <label for="square-repelent-retry">Square Repelent</label>
+                    <input id="square-repelent-retry" type='radio' name='power-up'>
+                    <br>
+                    <label for="edible-detector-retry">Edible Detector</label>
+                    <input id="edible-detector-retry" type='radio' name='power-up'>
+                </div>
                 <button id='reset-game' class='no-select'> Retry Level</button>
             </div>
         </div>

@@ -76,6 +76,7 @@ body {
 }
 
 #level-display {
+    display: none;
     position: absolute;
     right: 0px;
     top: 0px;
@@ -175,7 +176,7 @@ body {
     color: #ff5fc6;
 }
 
-#next-level {
+#next-level, #reset-game {
     border: none;
     padding: 12px;
     background: #e300ff;
