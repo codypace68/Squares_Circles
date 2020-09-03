@@ -72,6 +72,17 @@ const PlayerStage = class {
             this.player.invincibilityActive = false;
             this.player.mouseDown = false;
         })
+        
+        document.getElementById('mobile-invincibility').addEventListener('touchstart', (e) => {
+            if (this.player.radius > this.defaultPlayerRadius + 2) this.player.invincibilityActive = true;
+            this.player.mouseDown = true;
+        })
+
+        document.getElementById('mobile-invincibility').addEventListener('touchend', (e) => {
+            // player needs to be at least 2 bigger than default radius
+            this.player.invincibilityActive = false;
+            this.player.mouseDown = false;
+        })
 
 
         document.getElementById('show-player-hit-box').addEventListener('change', (e) => {

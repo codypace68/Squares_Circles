@@ -31,11 +31,11 @@ const levelDefs = {
         levelUpText: "You beat level two! Not too bad for a noob",
         enemies: [{
                 "class": "Circle",
-                "quanity": 25
+                "quanity": 10
             },
             {
-                "class": "FastSquare",
-                "quanity": 5
+                "class": "Square",
+                "quanity": 1 
             }
         ]
     },
@@ -43,11 +43,11 @@ const levelDefs = {
         levelUpText: "Level 3 has been slain!",
         enemies: [{
             "class": "Circle",
-            "quanity": 5
+            "quanity": 12
         },
         {
-            "class": "TrackingSquare",
-            "quanity": 7
+            "class": "Square",
+            "quanity": 5
         }]
     },
     "4": {
@@ -58,11 +58,89 @@ const levelDefs = {
         },
         {
             "class": "TrackingSquare",
+            "quanity": 1
+        },
+        {
+            "class": "Square",
+            "quanity": 5
+        }]
+    },
+    "5": {
+        levelUpText: "Level 5 is easy ;]",
+        enemies: [{
+            "class": "Circle",
+            "quanity": 15
+        },
+        {
+            "class": "TrackingSquare",
+            "quanity": 1
+        },
+        {
+            "class": "Square",
+            "quanity": 10
+        }]
+    },
+    "6": {
+        levelUpText: "Time to bring the heat!!",
+        enemies: [{
+            "class": "Circle",
+            "quanity": 20
+        },
+        {
+            "class": "TrackingSquare",
+            "quanity": 2
+        },
+        {
+            "class": "Square",
+            "quanity": 15
+        }]
+    },
+    "7": {
+        levelUpText: "Ooooo i see how it is. Such a 'Master'. ",
+        enemies: [{
+            "class": "Circle",
+            "quanity": 15
+        },
+        {
+            "class": "Square",
+            "quanity": 10
+        },
+        {
+            "class": "FastSquare",
+            "quanity": 1
+        }]
+    },
+    "8": {
+        levelUpText: "Ohh just you wait till level 9. It's ridiculous! Muahahah!",
+        enemies: [{
+            "class": "Circle",
+            "quanity": 25
+        },
+        {
+            "class": "Square",
+            "quanity": 10
+        },
+        {
+            "class": "FastSquare",
+            "quanity": 4
+        }]
+    },
+    "9": {
+        levelUpText: "What have you got to do to get rid of this zed?",
+        enemies: [{
+            "class": "Circle",
+            "quanity": 20
+        },
+        {
+            "class": "TrackingSquare",
             "quanity": 2
         },
         {
             "class": "FastSquare",
             "quanity": 4
+        },{
+            "class": "Square",
+            "quanity": 5
         }]
     }
 };

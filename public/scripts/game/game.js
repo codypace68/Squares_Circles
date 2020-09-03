@@ -34,6 +34,27 @@ const Game = class {
         document.querySelector('body').addEventListener('mouseleave', (e) => this.paused = true);
         document.querySelector('body').addEventListener('mouseenter', (e) => this.paused = false);
 
+        function detectMob() {
+            const toMatch = [
+                /Android/i,
+                /webOS/i,
+                /iPhone/i,
+                /iPad/i,
+                /iPod/i,
+                /BlackBerry/i,
+                /Windows Phone/i
+            ];
+        
+            return toMatch.some((toMatchItem) => {
+                return navigator.userAgent.match(toMatchItem);
+            });
+        }
+
+        if (detectMob()) {
+            document.getElementById('mobile-invincibility').style.display = 'block';
+            
+        }
+
     }
 
     drawEnemies() {

@@ -161,11 +161,13 @@ body {
 #final-score, #level-won-select-power-up-header{
     font-size: 30px;
     color: #ff8013;
+    margin: 5px;
 }
 
 #level-won-select-power-up-header{
     font-size: 30px;
     color: #42cbff;
+    margin: 5px;
 }
 
 #power-up-group {
@@ -179,4 +181,15 @@ body {
     background: #e300ff;
     color: white;
     margin-top: 32px;
+}
+
+#mobile-invincibility {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    width: 75px;
+    height: 75px;
+    background: #80808094;
+    border-radius: 50%;
 }
