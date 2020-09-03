@@ -2,12 +2,12 @@
   "name": "squares_circles",
   "version": "1.0.0",
   "description": "HTML5 games where circles eat circles and squares kill circles",
-  "main": "vectors.js",
+  "main": "views/index.html",
   "scripts": {
     "start": "node app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Cod Pace",
+  "author": "Cody Pace",
   "license": "ISC",
   "dependencies": {
     "koa": "^2.13.0",
