@@ -1,4 +1,6 @@
-import {Enemy} from '../enemy.js';
+import {
+    Enemy
+} from '../enemy.js';
 
 class Circle extends Enemy {
     constructor(x, y) {
@@ -8,6 +10,7 @@ class Circle extends Enemy {
         this.speed = 1;
         this.movingRight = false;
         this.movingUp = false;
+        this.collsionZone = false;
     }
 
     update(cWidth, cHeight, player, gameCycle) {
@@ -70,6 +73,17 @@ class Circle extends Enemy {
             ctx.lineWidth = 2
         }
 
+        // if (this.collsionZone) {
+        //     ctx.beginPath();
+        //     ctx.shadowColor = null;
+        //     ctx.shadowBlur = null;
+        //     ctx.shadowOffsetX = 0;
+        //     ctx.shadowOffsetY = 0;
+        //     ctx.arc(this.x, this.y, this.radius + 5, 0, 2 * Math.PI);
+        //     ctx.fillStyle = 'rgba(255, 0, 0, .4)';
+        //     ctx.fill();
+        // }
+
         ctx.beginPath();
         ctx.shadowColor = null;
         ctx.shadowBlur = null;
@@ -79,6 +93,35 @@ class Circle extends Enemy {
         ctx.fillStyle = this.color;
         ctx.fill();
     }
+
+    checkCollision(player) {
+        this.collsionZone = this.checkCollisionZone(player);
+
+        // if one is on the left of the other
+        if (this.x - this.hitBoxSize / 2 >= player.x + player.hitBoxSize / 2 ||
+            player.x - player.hitBoxSize / 2 >= this.x + this.hitBoxSize / 2) return false;
+
+        // if one is above the other
+        if (this.y - this.hitBoxSize / 2 >= player.y + player.hitBoxSize / 2 ||
+            player.y - player.hitBoxSize / 2 >= this.y + this.hitBoxSize / 2) return false;
+
+        return true;
+    }
+
+    checkCollisionZone(player) {
+        const hitBox = this.hitBoxSize + 40;
+        // if one is on the left of the other
+        if (this.x - hitBox / 2 >= player.x + player.hitBoxSize / 2 ||
+            player.x - player.hitBoxSize / 2 >= this.x + hitBox / 2) return false;
+
+        // if one is above the other
+        if (this.y - hitBox / 2 >= player.y + player.hitBoxSize / 2 ||
+            player.y - player.hitBoxSize / 2 >= this.y + hitBox / 2) return false;
+
+        return true;
+    }
 }
 
-export {Circle};
+export {
+    Circle
+};

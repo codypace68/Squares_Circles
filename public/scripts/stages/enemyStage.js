@@ -41,32 +41,6 @@ const EnemyStage = class {
     createEnemies(level, defaultPlayerRadius) {
         this.enemies = []; // delete old enemies
         this.enemiesAlive = 0;
-        const totalEnemies = 20 + level * 2; // 20 base plus level * 2 for each level up
-        const killPlayerCount = (level / 100) * 100; // 1% at level 1 20% at level 20
-
-        // always create 5 point at a level lower than the players base leve to ensure the level is beatable
-        // for (let i = 0; i < 5; i += 1) {
-        // this.enemies.push(new FastSquares(parseInt(Math.random() * (this.width - 60)) + 60, parseInt(Math.random() * this.height), 10, 'red'));
-        // const x = parseInt(Math.random() * (this.width - 60)) + 60;
-        // const y = parseInt(Math.random() * this.height);
-        // this.enemiesAlive += 1;
-        // const radius = defaultPlayerRadius - 2;
-        // const color = `rgba(${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)}, .6)`;
-        // const hitBoxSize = (radius * 2) / Math.sqrt(2);
-
-        // this.enemies.push({
-        //     x,
-        //     y,
-        //     radius,
-        //     color,
-        //     hitBoxSize,
-        //     display: true,
-        //     movingRight: parseInt(Math.random() * 50) >= 25,
-        //     movingUp: parseInt(Math.random() * 50) >= 25,
-        //     killPlayer: false,
-        //     followPlayer: true,
-        // })
-        // }
 
         levelDefs[level].enemies.forEach(def => {
             for (let i = 0; i < def.quanity; i += 1) {

@@ -1,7 +1,9 @@
 import {
     levelDefs
 } from '../main.js';
-console.log('test')
+const storage = window.localStorage;
+if (!storage.getItem('levels')) storage.setItem('levels', JSON.stringify([]))
+
 const Game = class {
     constructor(mainStage, playerStage, enemyStage) {
         this.mainStage = mainStage;
@@ -42,6 +44,11 @@ const Game = class {
 
         // // auto level down
         document.getElementById('level-down').addEventListener('click', this.levelDown.bind(this));
+
+        // next level on game over
+        document.getElementById('level-up-retry').addEventListener('click', this.levelUp.bind(this));
+
+        document.getElementById('level-down-retry').addEventListener('click', this.levelDown.bind(this));
 
         // reset game after death
         document.getElementById('reset-game').addEventListener('click', this.resetGame.bind(this));
@@ -197,13 +204,14 @@ const Game = class {
         this.enemyStage.enemies.forEach(enemy => {
             if (!enemy.display) return;
 
-            // if one is on the left of the other
-            if (enemy.x - enemy.hitBoxSize / 2 >= player.x + player.hitBoxSize / 2 ||
-                player.x - player.hitBoxSize / 2 >= enemy.x + enemy.hitBoxSize / 2) return;
+            if (!enemy.checkCollision(player, this.gameCycle)) return;
+            // // if one is on the left of the other
+            // if (enemy.x - enemy.hitBoxSize / 2 >= player.x + player.hitBoxSize / 2 ||
+            //     player.x - player.hitBoxSize / 2 >= enemy.x + enemy.hitBoxSize / 2) return;
 
-            // if one is above the other
-            if (enemy.y - enemy.hitBoxSize / 2 >= player.y + player.hitBoxSize / 2 ||
-                player.y - player.hitBoxSize / 2 >= enemy.y + enemy.hitBoxSize / 2) return;
+            // // if one is above the other
+            // if (enemy.y - enemy.hitBoxSize / 2 >= player.y + player.hitBoxSize / 2 ||
+            //     player.y - player.hitBoxSize / 2 >= enemy.y + enemy.hitBoxSize / 2) return;
 
             // Everything past this point is a collision
             if (enemy.killPlayer) { // if square
@@ -286,7 +294,6 @@ const Game = class {
     }
 
     resetGame() {
-        console.log(this.retryLevel)
         this.playerStage.player.alive = true;
         this.playerStage.player.radius = this.playerStage.defaultPlayerRadius;
         this.playerStage.player.hitBoxSize = (this.playerStage.defaultPlayerRadius * 2) / Math.sqrt(2);
@@ -321,6 +328,15 @@ const Game = class {
     }
 
     levelUp() {
+        if (this.level !== 0) {
+            const levels = storage.getItem('levels');
+            const parsedLevels = JSON.parse(levels);
+            if (parsedLevels.indexOf(this.level) === -1 ) {
+                parsedLevels.push(this.level)
+                storage.setItem('levels', JSON.stringify(parsedLevels));
+            }
+        }
+        
         this.level += 1;
         document.getElementById('level-label').innerHTML = `Level ${this.level}`;
         this.retryLevel = false;

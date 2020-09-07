@@ -104,6 +104,7 @@ class FastSquare extends Enemy {
             ctx.fill();
         }
     }
+
 }
 
 export {
