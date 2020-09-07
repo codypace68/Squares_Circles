@@ -76,7 +76,7 @@ body {
 }
 
 #level-display {
-    display: none;
+    /* display: none; */
     position: absolute;
     right: 0px;
     top: 0px;
@@ -84,6 +84,10 @@ body {
     background: #0000008f;
     border-bottom-left-radius: 50px;
     color: white;
+}
+
+#dev-controls {
+    display: none;
 }
 
 #level-display h4{
