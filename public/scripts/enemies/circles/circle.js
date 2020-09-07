@@ -73,17 +73,6 @@ class Circle extends Enemy {
             ctx.lineWidth = 2
         }
 
-        // if (this.collsionZone) {
-        //     ctx.beginPath();
-        //     ctx.shadowColor = null;
-        //     ctx.shadowBlur = null;
-        //     ctx.shadowOffsetX = 0;
-        //     ctx.shadowOffsetY = 0;
-        //     ctx.arc(this.x, this.y, this.radius + 5, 0, 2 * Math.PI);
-        //     ctx.fillStyle = 'rgba(255, 0, 0, .4)';
-        //     ctx.fill();
-        // }
-
         ctx.beginPath();
         ctx.shadowColor = null;
         ctx.shadowBlur = null;

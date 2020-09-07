@@ -78,7 +78,7 @@ class LaserSquare extends Enemy {
 
         // draw "lasers" coming from corner
         for (let i = 0; i <= 3; i += 1) { // four corners
-            const degree = 90 * i + 45 + (gameCycle / 10);
+            const degree = 90 * i + 45 + (gameCycle / 10);// rotate the position of each laser based on the number of game cycles
             const radian = degree * (Math.PI / 180);
             this.laserCoords[i].x = this.x + (laserRadius * Math.cos(radian));
             this.laserCoords[i].y = this.y + (laserRadius * Math.sin(radian));
@@ -122,8 +122,7 @@ class LaserSquare extends Enemy {
             const b = x1 - x0;
             const c = ((x0 - x1) * y0) + (x0 * (y1 - y0));
             const dist = Math.abs( (a * player.x) + (b * player.y) + c) / Math.sqrt((Math.pow(a, 2)) + (Math.pow(b, 2)));
-            console.log(dist, player.radius)
-            if (dist < player.radius && gameCycle > 5) collision = true;
+            if (dist < player.radius && gameCycle > 5 && dist > 5) collision = true;
         }
 
         return collision

@@ -15,6 +15,7 @@ class FastSquare extends Enemy {
 
     update(cWidth, cHeight, player, gameCycle) {
         if (player.invincibilityActive && player.squareRepelent) {
+            // Move enemy away from player along the direction a line would go through the two.
             const x1 = player.x;
             const y1 = player.y;
             const x0 = this.x;
@@ -79,6 +80,7 @@ class FastSquare extends Enemy {
             let prevX0;
             let prevY0;
 
+            // determines direction the after images should be drawn
             if (this.movingRight && this.movingUp) {
                 prevX0 = this.x - ((tailLength + cycleRatio * segmentSeperation) * i);
                 prevY0 = this.y + ((tailLength + cycleRatio * segmentSeperation) * i);

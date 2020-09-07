@@ -21,6 +21,7 @@ const PlayerStage = class {
             showGuidingPoint: document.getElementById('show-player-guiding-point').checked,
             alive: true,
             invincibilityActive: false,
+            speedBoost: false,
             squareRepelent: false,
             edibleDetector: false,
             circleMagnet: false,
@@ -106,7 +107,7 @@ const PlayerStage = class {
         this.ctx.fillStyle = this.player.color;
         this.ctx.fill();
 
-        // temp
+        // draw line from player to requested position
         this.ctx.beginPath();
         this.ctx.moveTo(this.player.x, this.player.y);
         this.ctx.lineTo(this.player.requestedPosition.x, this.player.requestedPosition.y);
@@ -125,6 +126,7 @@ const PlayerStage = class {
     }
 
     updatePlayerPosition(speed) {
+        if (this.player.speedBoost) speed = speed += 3;
         // https://math.stackexchange.com/questions/175896/finding-a-point-along-a-line-a-certain-distance-away-from-another-point
         const x1 = this.player.requestedPosition.x;
         const y1 = this.player.requestedPosition.y;

@@ -220,7 +220,7 @@ const levelDefs = {
             "quanity": 20
         }]
     },
-    "15": {
+    "14": {
         levelUpText: "hmmmm.. this calls for strategery. Don't eat to fast ;)",
         enemies: [{
             "class": "Circle",
@@ -239,6 +239,30 @@ const levelDefs = {
         },{
             "class": "AlternatingSizeCircle",
             "quanity": 5
+        }]
+    },
+    "15": {
+        levelUpText: "ohh wow wow wow!",
+        enemies: [{
+            "class": "Circle",
+            "quanity": 40
+        },
+        {
+            "class": "TrackingSquare",
+            "quanity": 0
+        },
+        {
+            "class": "FastSquare",
+            "quanity": 0
+        },{
+            "class": "Square",
+            "quanity": 10
+        },{
+            "class": "AlternatingSizeCircle",
+            "quanity": 10
+        },{
+            "class": "LaserSquare",
+            "quanity": 1
         }]
     }
 };

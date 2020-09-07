@@ -18,7 +18,7 @@ class TrackingSquare extends Enemy {
         const y0 = this.y;
         const distance = Math.sqrt((Math.pow((x1 - x0), 2)) + (Math.pow((y1 - y0), 2)));
         let distanceRatio = distance === 0 ? 0 : (this.speed * 2) / distance;
-        if (player.invincibilityActive) distanceRatio = -((this.speed * 2) / distance);
+        if (player.invincibilityActive) distanceRatio = -((this.speed * 2) / distance);// move square away from player if player is currently invincible
         if (distanceRatio >= 1) return;
         const newPoint = {
             x: (1 - distanceRatio) * x0 + distanceRatio * x1,

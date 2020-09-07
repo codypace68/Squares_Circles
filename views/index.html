@@ -57,8 +57,11 @@
         <div class='noselect' id='game-over-menu'>
             <div id='game-over-text'>
                 <h4 > Game Over! Better Luck next time</h4>
-                <h5 id='level-won-select-power-up-header'>Please select your powerups for this level. <br> Click "Retry Level" when ready</h5>
+                <h5 id='game-over-select-power-up-header'>Please select your powerup for this level. <br> Click "Retry Level" when ready</h5>
                 <div id='power-up-group'>
+                    <label for="speed-boost-retry">Speed-Boost</label>
+                    <input id="speed-boost-retry" type='radio' name='power-up'>
+                    <br>
                     <label for="circle-magnet-retry">Circle Magnet</label>
                     <input id="circle-magnet-retry" type='radio' name='power-up'>
                     <br>
@@ -69,10 +72,6 @@
                     <input id="edible-detector-retry" type='radio' name='power-up'>
                 </div>
                 <button id='reset-game' class='no-select'> Retry Level</button>
-                <div>
-                    <button id='level-down-retry'>Previous Level</button>
-                    <button id='level-up-retry'>Next Level</button>
-                </div>
             </div>
         </div>
 
@@ -80,8 +79,11 @@
             <div id='level-won-text'>
                 <h4 id='level-won-text-header'> Welcome to Squares and Circles! </h4>
                 <h5 id='final-score'></h5>
-                <h5 id='level-won-select-power-up-header'>Please select your powerups for this level. <br> Click "Play Level" when ready</h5>
+                <h5 id='level-won-select-power-up-header'>Please select your powerup for this level. <br> Click "Play Level" when ready</h5>
                 <div id='power-up-group'>
+                    <label for="speed-boost">Speed-Boost</label>
+                    <input id="speed-boost" type='radio' name='power-up'>
+                    <br>
                     <label for="circle-magnet">Circle Magnet</label>
                     <input id="circle-magnet" type='radio' name='power-up'>
                     <br>

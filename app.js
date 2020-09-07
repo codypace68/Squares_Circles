@@ -24,4 +24,3 @@ app.use(serve('./views/'));
 app.use(serve('./public'));
 
 app.listen(process.env.PORT || 3000);
-console.log(process.env.PORT || 3000)

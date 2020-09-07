@@ -169,7 +169,7 @@ body {
     margin: 5px;
 }
 
-#level-won-select-power-up-header{
+#level-won-select-power-up-header, #game-over-select-power-up-header{
     font-size: 30px;
     color: #42cbff;
     margin: 5px;
