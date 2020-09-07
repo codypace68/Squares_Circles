@@ -77,7 +77,7 @@ const levelDefs = {
         },
         {
             "class": "Square",
-            "quanity": 10
+            "quanity": 7
         }]
     },
     "6": {
@@ -92,7 +92,7 @@ const levelDefs = {
         },
         {
             "class": "Square",
-            "quanity": 15
+            "quanity": 11
         }]
     },
     "7": {
