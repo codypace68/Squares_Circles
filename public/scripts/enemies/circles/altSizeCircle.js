@@ -3,7 +3,7 @@ import {Enemy} from '../enemy.js';
 class AlternatingSizeCircle extends Enemy {
     constructor(x, y) {
         const radius = parseInt(Math.random() * 20) + 5;
-        const color = 'rgba(0,255,0,.6)';
+        const color = '#74ee15';
         super(x, y, radius, color);
         this.speed = 1;
         this.maxSize = 25;
@@ -89,6 +89,8 @@ class AlternatingSizeCircle extends Enemy {
         ctx.shadowOffsetY = 0;
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
         ctx.fill();
     }
 }

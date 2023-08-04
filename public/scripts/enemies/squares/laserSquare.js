@@ -101,8 +101,8 @@ class LaserSquare extends Enemy {
         ctx.rect(this.x - this.radius / 2, this.y - this.radius / 2, this.radius, this.radius);
         ctx.fillStyle = this.color;
         ctx.lineWidth = 2;
-        ctx.strokeStyle = 'black'
-        ctx.stroke();
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 15 * cycleRatio;
         ctx.fill();
     }
 

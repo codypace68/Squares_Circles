@@ -39,7 +39,8 @@ class TrackingSquare extends Enemy {
         ctx.fillStyle = this.color;
         ctx.lineWidth = 2;
         ctx.strokeStyle = 'red'
-        ctx.stroke();
+        ctx.shadowColor = 'red';
+        ctx.shadowBlur = 10;
         ctx.fill();
     }
 }

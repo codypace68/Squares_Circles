@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" type="text/css" href="styles/style.css"></link>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="/square-circles/styles/style.css"></link>
         <link rel="shortcut icon" href="images/favicon.png">
     </head>
     <body>
@@ -12,7 +13,7 @@
             <canvas id="player-stage"></canvas>
             <div id='game-controls'>
                 <div>
-                    <h4 id='invincibility-label'>Invincibilty Meter</h4>
+                    <h4 id='invincibility-label'>Apetite</h4>
                     <div id = 'invincibility-meter' class='empty'>
                         <div id = 'invincibility-left'>
     
@@ -20,7 +21,7 @@
                     </div>
                 </div>
                 <div>
-                    <h4 id='current-score'>Score: 0</h4>
+                    <h4 id='current-score' style="display:none;">Score: 0</h4>
                 </div>
             </div>
             <div id='level-display'>
@@ -100,6 +101,6 @@
 
         <div id='mobile-invincibility'></div>
         
-        <script src='scripts/main.js' type='module'></script>
+        <script src='/square-circles/scripts/main.js' type='module'></script>
     </body>
 </html>

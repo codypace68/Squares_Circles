@@ -3,7 +3,7 @@ import {Enemy} from '../enemy.js';
 class Square extends Enemy {
     constructor(x, y) {
         const radius = 10;
-        const color = '#ffb205';
+        const color = '	#ffe700';
         super(x, y, radius, color);
         this.speed = 1;
         this.movingRight = false;
@@ -61,8 +61,8 @@ class Square extends Enemy {
         ctx.rect(this.x - this.radius / 2, this.y - this.radius / 2, this.radius, this.radius);
         ctx.fillStyle = this.color;
         ctx.lineWidth = 2;
-        ctx.strokeStyle = 'black'
-        ctx.stroke();
+        ctx.shadowColor = '#ffe700';
+        ctx.shadowBlur = 10;
         ctx.fill();
     }
 }

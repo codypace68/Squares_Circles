@@ -9,15 +9,27 @@ const Stage =  class {
 
         this.ctx.beginPath();
         this.ctx.rect(0,0, this.canvas.width, this.canvas.height )
-        this.ctx.fillStyle = 'white';
+        this.ctx.fillStyle = '#393939';
         this.ctx.fill();
+
+
+        var background = new Image();
+        background.src = "/images/Black And Turquoise Futuristic Twitch Webcam Overlay Template.png";
+
+        // Make sure the image is loaded first otherwise nothing will draw.
+        background.onload = () => {
+            this.ctx.drawImage(background,0,0,this.canvas.width,this.canvas.height);   
+        }
+
         window.addEventListener('resize', () => {
             this.canvas.width = window.innerWidth;
             this.canvas.height = window.innerHeight;
             this.ctx.beginPath();
             this.ctx.rect(0,0, this.canvas.width, this.canvas.height )
-            this.ctx.fillStyle = 'white';
+            this.ctx.fillStyle = '#393939';
             this.ctx.fill();
+            this.ctx.drawImage(background,0,0,this.canvas.width,this.canvas.height);   
+
         })
     }
 

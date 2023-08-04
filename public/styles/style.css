@@ -41,9 +41,10 @@ body {
 
 #game-controls {
     position: absolute;
-    background: #0000008f;
     padding: 10px;
     border-bottom-right-radius: 50px;
+    width: 36vw;
+    left: 6vw;
 }
 
 #invincibility-label {
@@ -59,11 +60,13 @@ body {
     margin-right: 17px;
     display: inline-block;
     line-height: 100%;
+    margin: 5px;
+    width: 95%;
 }
 
 #invincibility-meter.empty {
-    border: 2px solid red;
-    box-shadow: 0px 0px 6px red;    
+    border: 2px solid #7a49da;
+    box-shadow: 0px 0px 6px rgb(180, 17, 17);    
 }
 
 #invincibility-left {
@@ -76,14 +79,14 @@ body {
 }
 
 #level-display {
-    /* display: none; */
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    padding: 20px;
-    background: #0000008f;
-    border-bottom-left-radius: 50px;
-    color: white;
+        /* display: none; */
+        position: absolute;
+        right: 28vw;
+        top: 2vh;
+        padding: 20px;
+        /* background: #0000008f; */
+        border-bottom-left-radius: 50px;
+        color: white;
 }
 
 #dev-controls {
@@ -136,8 +139,9 @@ body {
 }
 
 #level-won-text h4 {
-    color: #69f031;
+    color: #9C27B0;
     font-size: 35px;
+    margin-top: 15vh;
 }
 
 .noselect {
@@ -165,13 +169,13 @@ body {
 
 #final-score, #level-won-select-power-up-header{
     font-size: 30px;
-    color: #ff8013;
+    color: #d7d7d7;
     margin: 5px;
 }
 
 #level-won-select-power-up-header, #game-over-select-power-up-header{
     font-size: 30px;
-    color: #42cbff;
+    color: #d7d7d7;
     margin: 5px;
 }
 
@@ -183,8 +187,8 @@ body {
 #next-level, #reset-game {
     border: none;
     padding: 12px;
-    background: #e300ff;
-    color: white;
+    background: linear-gradient(45deg, #8750f6, #00b7c0);    color: white;
+    border-radius: 20px;
     margin-top: 32px;
 }
 

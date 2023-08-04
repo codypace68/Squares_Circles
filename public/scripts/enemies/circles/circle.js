@@ -5,12 +5,17 @@ import {
 class Circle extends Enemy {
     constructor(x, y) {
         const radius = 7;
-        const color = 'rgba(0,0,255,.6)';
+        const color = '#74ee15';
         super(x, y, radius, color);
         this.speed = 1;
         this.movingRight = false;
         this.movingUp = false;
         this.collsionZone = false;
+        this.shadowSize = 1;
+        this.shadowStep= .15;
+        this.shadowMax = 10;
+        this.shadowMin = 1;
+        this.shadowDirection = 'grow';
     }
 
     update(cWidth, cHeight, player, gameCycle) {
@@ -80,6 +85,21 @@ class Circle extends Enemy {
         ctx.shadowOffsetY = 0;
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+
+        
+
+        if (this.shadowSize > this.shadowMax || this.shadowSize < this.shadowMin) {
+            this.shadowDirection = this.shadowDirection === 'grow' ? 'shrink' : 'grow';
+        }
+
+        if (this.shadowDirection === 'grow') {
+            this.shadowSize += this.shadowStep;
+        } else {
+            this.shadowSize -= this.shadowStep;
+        }
+
+        ctx.shadowBlur = this.shadowSize;
         ctx.fill();
     }
 

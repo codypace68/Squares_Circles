@@ -17,6 +17,9 @@ const Game = class {
         const myRadios = document.getElementsByName('power-up');
         let setCheck;
         let x = 0;
+        this.delay = 1000 / 60; // 60fps
+        this.frame = 0;
+        this.time = null;
 
         // add ability for radio buttons to be unchecked
         for (x = 0; x < myRadios.length; x++) {
@@ -30,6 +33,15 @@ const Game = class {
             };
 
         }
+
+        // display dev tools on d + e + v
+        document.addEventListener('keydown', (e) => {
+            console.log(e.key, document.getElementById('dev-controls'));
+            if (e.key === 'd') {
+                const devControls = document.getElementById('dev-controls');
+                devControls.style.display = devControls.style.display === 'block' ? 'none': 'block';
+            } 
+        })
 
         // auto level up (dev only)
         document.getElementById('level-up').addEventListener('click', this.levelUp.bind(this));
@@ -64,18 +76,18 @@ const Game = class {
             });
         }
 
-        if (detectMob()) {
-            document.getElementById('mobile-invincibility').style.display = 'block';
+        // if (detectMob()) {
+        //     document.getElementById('mobile-invincibility').style.display = 'block';
 
-        }
+        // }
 
         // start the game cycle
-        window.requestAnimationFrame(this.mainCycle.bind(this));
+        window.requestAnimationFrame(this.mainCycle.bind(this,[0]));
     }
 
     drawPlayer() {
         const player = this.playerStage.player;
-        this.drawCircle(this.playerStage.ctx, player.radius, player.x, player.y, 'rgba(255,155,8,.5)', player.mouseDown, player.invincibilityActive ? 'green' : 'red', true)
+        this.drawCircle(this.playerStage.ctx, player.radius, player.x, player.y, '#f000ff', player.mouseDown, player.invincibilityActive ? 'green' : 'red', true)
         if (player.showHitBox) this.drawHitBox(this.playerStage.ctx, {// dev only
             x: player.x,
             y: player.y
@@ -93,6 +105,8 @@ const Game = class {
         ctx.shadowOffsetY = 0;
         ctx.arc(x, y, radius * this.scaleValue, 0, 2 * Math.PI);
         ctx.fillStyle = color;
+        ctx.shadowColor = color;
+        ctx.shadowBlur = 10;
         ctx.fill();
     }
 
@@ -105,47 +119,48 @@ const Game = class {
 
     checkCollsion() {
         const player = this.playerStage.player;
+        let squareEaten = false;
         this.enemyStage.enemies.forEach(enemy => {
             if (!enemy.display) return;
             if (!enemy.checkCollision(player, this.gameCycle)) return;
+            let enemyProcessed = false;
 
             // Everything past this point is a collision
             if (enemy.killPlayer) { // if square
-                if (player.invincibilityActive) { // if player has iniated invicibility it can kill squares
+                if (player.radius > this.playerStage.defaultPlayerRadius) { // if player has iniated invicibility it can kill squares
                     enemy.display = false;
                     this.enemyStage.enemiesAlive -= 1;
-                    this.updateScore(15)
+                    this.updateScore(15);
+                    enemyProcessed = true;// indicates an enamy has been processed in this loop
+                    squareEaten = true;// used to consume apetite after enemy loop
+                } else {
+                    // if player didn't have invincibility active they die
+                    this.setGameOver();
                     return;
                 }
-
-                // if player didn't have invincibility active they die
-                this.setGameOver();
-                return;
             }
 
 
             // player cannot interact with circles while invincible
-            if (!player.invincibilityActive) {
-                if (enemy.radius < player.radius) { // player eats point
-                    this.updateScore(enemy.radius);
-                    player.radius += enemy.radius / 3;
-                    player.hitBoxSize = (player.radius * 2) / Math.sqrt(2)
-                    enemy.display = false;
-                    // if (player.radius > 8) numCols += 5;
-                    this.enemyStage.enemiesAlive -= 1;
+            if (enemy.radius < player.radius && !enemyProcessed) { // player eats point
+                this.updateScore(enemy.radius);
+                player.radius += enemy.radius / 3;
+                player.hitBoxSize = (player.radius * 2) / Math.sqrt(2)
+                enemy.display = false;
+                // if (player.radius > 8) numCols += 5;
+                this.enemyStage.enemiesAlive -= 1;
 
-                    if (enemy.isStar) {
-                        this.enemyFreezeCycles += 500;
-                        this.enemyStage.enemies.filter(value => value.killPlayer && value.display).forEach(enemy => {
-                            enemy.display = parseInt(Math.random() * 10) > 1;
-                            if (!enemy.display) this.enemyStage.squaresAlive -= 1;
-                        })
-                    }
-                } else { // point eats player
-                    enemy.radius += player.radius / 2;
-                    enemy.hitBoxSize = (enemy.radius * 2) / Math.sqrt(2)
-                    this.setGameOver();
+                if (enemy.isStar) {
+                    this.enemyFreezeCycles += 500;
+                    this.enemyStage.enemies.filter(value => value.killPlayer && value.display).forEach(enemy => {
+                        enemy.display = parseInt(Math.random() * 10) > 1;
+                        if (!enemy.display) this.enemyStage.squaresAlive -= 1;
+                    })
                 }
+            } else if (!enemyProcessed) { // point eats player
+                enemy.radius += player.radius / 2;
+                enemy.hitBoxSize = (enemy.radius * 2) / Math.sqrt(2)
+                this.setGameOver();
             }
         })
 
@@ -164,8 +179,8 @@ const Game = class {
                 document.getElementById('invincibility-meter').classList.add('empty');
             } else document.getElementById('invincibility-meter').classList.remove('empty');
 
-            if (player.invincibilityActive) {
-                player.radius -= .3; // decrease radius while invincibility is active
+            if (squareEaten) {
+                player.radius -= 7/3; // size of a standard circle growth
                 player.hitBoxSize = (player.radius * 2) / Math.sqrt(2)
                 if (player.radius <= this.playerStage.defaultPlayerRadius) player.invincibilityActive = false;
                 this.updateScore(-.5)
@@ -219,12 +234,10 @@ const Game = class {
     }
 
     setLevelUp() {
-        console.log('running level up', this.level + 1)
         this.menuDisplayed = true;
         document.getElementById('level-won-menu').style.display = 'flex';
         document.getElementById('final-score').innerHTML = `Final Score: ${parseInt(this.score)}`;
         document.getElementById('level-won-text-header').innerHTML = levelDefs[this.level].levelUpText;
-        console.log(document.getElementById('level-won-select-power-up-header'))
         document.getElementById('level-won-select-power-up-header').innerHTML = `Please select your powerup for level ${this.level + 1}. <br> Click "Play Level" when ready`
     }
 
@@ -249,9 +262,34 @@ const Game = class {
         this.enemyStage.createEnemies(this.level, this.playerStage.defaultPlayerRadius); // clear old enemies and draw new ones
     }
 
-    mainCycle() {
-        if (this.level === 0) return requestAnimationFrame(this.mainCycle.bind(this));
-        if (this.paused) return requestAnimationFrame(this.mainCycle.bind(this));// don't run logic while game is paused
+    mainCycle(timestamp) {
+        if (this.time === null) this.time = timestamp;
+
+        const now = performance.now();
+        const elapsed = now - this.time;
+
+        if (elapsed > this.delay) {
+            let canvasIds = [];
+            this.frame++;
+            this.time = now;
+
+            this.processFrame.call(this,timestamp);
+        }
+
+
+        window.requestAnimationFrame((timestamp) => {
+            this.mainCycle.call(this,timestamp);            
+        })
+    }
+
+    processFrame(timestamp) {
+        if (this.level === 0) {
+            this.mainCycle.call(this,timestamp);
+            return;
+        }
+        if (this.paused) {
+            return this.mainCycle.call(this,timestamp);// don't run logic while game is paused
+        }
         if (this.enemyFreezeCycles === 0) this.enemyStage.updateEnemyPositions(this.playerStage.player, this.gameCycle);
         if (this.playerStage.player.alive) this.playerStage.updatePlayerPosition(this.playerStage.player.invincibilityActive ? 5 : 2);
         if (this.playerStage.player.alive && !this.menuDisplayed) this.checkCollsion();
@@ -266,7 +304,6 @@ const Game = class {
         if (this.playerStage.player.showGuidingPoint) this.playerStage.drawGuidingPoint();
         if (this.enemyFreezeCycles > 0) this.enemyFreezeCycles -= 1;
         this.gameCycle += 1;// game cycle is used for animations 
-        requestAnimationFrame(this.mainCycle.bind(this));
     }
 }
 

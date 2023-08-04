@@ -4,26 +4,6 @@ const levelDefs = {
         enemies: [{
                 "class": "Circle",
                 "quanity": 1,
-            },
-            {
-                "class": "Square",
-                "quanity": 0
-            },
-            {
-                "class": "TrackingSquare",
-                "quanity": 0
-            },
-            {
-                "class": "AlternatingSizeCircle",
-                "quanity": 0
-            },
-            {
-                "class": "FastSquare",
-                "quanity": 0
-            },
-            {
-                "class": "LaserSquare",
-                "quanity": 0
             }
         ]
     },
@@ -31,7 +11,7 @@ const levelDefs = {
         levelUpText: "You beat level two! Not too bad for a noob",
         enemies: [{
                 "class": "Circle",
-                "quanity": 10
+                "quanity": 1
             },
             {
                 "class": "Square",
@@ -43,18 +23,18 @@ const levelDefs = {
         levelUpText: "Level 3 has been slain!",
         enemies: [{
             "class": "Circle",
-            "quanity": 12
+            "quanity": 3
         },
         {
             "class": "Square",
-            "quanity": 5
+            "quanity": 2
         }]
     },
     "4": {
         levelUpText: "Wow, level 4 too? Maybe you could be the one..",
         enemies: [{
             "class": "Circle",
-            "quanity": 15
+            "quanity": 8
         },
         {
             "class": "TrackingSquare",
@@ -69,7 +49,7 @@ const levelDefs = {
         levelUpText: "Level 5 is easy ;]",
         enemies: [{
             "class": "Circle",
-            "quanity": 15
+            "quanity": 10
         },
         {
             "class": "TrackingSquare",
@@ -84,7 +64,7 @@ const levelDefs = {
         levelUpText: "Time to bring the heat!!",
         enemies: [{
             "class": "Circle",
-            "quanity": 20
+            "quanity": 15
         },
         {
             "class": "TrackingSquare",

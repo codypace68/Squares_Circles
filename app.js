@@ -23,6 +23,6 @@ app.use(async (ctx, next) => {
 app.use(serve('./views/'));
 app.use(serve('./public'));
 
-app.listen(process.env.PORT || 3000, process.env.ADDRESS || '0.0.0.0', () => {
-  console.log('listening on port ' +  process.env.PORT || 3000)
+app.listen(process.env.PORT || 4000, process.env.ADDRESS || '0.0.0.0', () => {
+  console.log('listening on port ' +  process.env.PORT || 4000)
 });
